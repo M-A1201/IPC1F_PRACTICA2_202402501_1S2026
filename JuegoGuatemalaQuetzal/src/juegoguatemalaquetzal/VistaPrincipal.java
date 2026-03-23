@@ -94,16 +94,19 @@ public class VistaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
-    
+    //se crea un hilo para el primer personaje 
         Thread hilo =new Thread(()->{
+            //movimiento del personaje para moverse hacia la meta 
     for(int x=lblMago1.getX(); x<=this.getWidth()-100; x+=10){
        int nuevax=x;
+       //se actualiza la posicion del peronaje en la interfaz grafica
       javax.swing.SwingUtilities.invokeLater(()->{
         lblMago1.setLocation(nuevax, lblMago1.getY());  
       });
     
     
     try{
+        //se pausa segun la velocidad de la escoba
       Thread.sleep(personajes[0].getEscoba().getDormirSegundos()*100);
     }catch(InterruptedException e){
         e.printStackTrace();
@@ -112,7 +115,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     }
     });
 
-
+//se crea el segundo hilo para el segundo peronaje 
 Thread hilo2=new Thread(()->{
   for(int x=lblMago2.getX(); x<=this.getWidth()-100; x+=10){
        int nuevax=x;
@@ -127,13 +130,15 @@ Thread hilo2=new Thread(()->{
   }
   }
 });
+//se inician ambos hilos para ejecutar la carrera
 hilo.start();
 hilo2.start();
         // TODO add your handling code here:
     }//GEN-LAST:event_btnIniciarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-this.setVisible(false);
+//al precional el boton salir cierra la ventana de la interfaz grafica 
+        this.setVisible(false);
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSalirActionPerformed
 
