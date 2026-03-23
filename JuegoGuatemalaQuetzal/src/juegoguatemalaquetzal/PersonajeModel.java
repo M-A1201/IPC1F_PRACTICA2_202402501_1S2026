@@ -5,13 +5,16 @@ package juegoguatemalaquetzal;
  *
  * @author Manuel
  */
+
 public class PersonajeModel {
+    
+    //atributos del personaje 
   int idpersonaje;
 String nombre;
 Casa casa;
 EscobaModel escoba;
 
-
+//metodo getter y setter para obtener y asignar los atributos del personaje
     public int getIdpersonaje() {
         return idpersonaje;
     }
