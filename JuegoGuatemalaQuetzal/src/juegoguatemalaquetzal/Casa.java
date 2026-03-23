@@ -7,7 +7,6 @@ package juegoguatemalaquetzal;
  */
 public enum Casa {
   GRIFINDOR,
-  SLYNERIN,
   RAVENCLAW,
   SLYTHERIN,
   HUFFLEPUFF,

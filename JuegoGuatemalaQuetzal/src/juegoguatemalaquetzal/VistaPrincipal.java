@@ -34,6 +34,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         lblMago1 = new javax.swing.JLabel();
         lblMago2 = new javax.swing.JLabel();
         btnSalir = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -49,6 +50,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
         btnSalir.setText("SALIR");
         btnSalir.addActionListener(this::btnSalirActionPerformed);
 
+        jLabel1.setText("META");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -56,9 +59,14 @@ public class VistaPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblMago2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblMago1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblMago2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblMago1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(23, 23, 23))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(202, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -70,7 +78,9 @@ public class VistaPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(43, 43, 43)
-                .addComponent(lblMago1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblMago1)
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addComponent(lblMago2)
                 .addGap(38, 38, 38)
@@ -84,13 +94,14 @@ public class VistaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
-Thread hilo =new Thread(()->{
+    
+        Thread hilo =new Thread(()->{
     for(int x=lblMago1.getX(); x<=this.getWidth()-100; x+=10){
        int nuevax=x;
       javax.swing.SwingUtilities.invokeLater(()->{
         lblMago1.setLocation(nuevax, lblMago1.getY());  
       });
-    }
+    
     
     try{
       Thread.sleep(personajes[0].getEscoba().getDormirSegundos()*100);
@@ -98,7 +109,7 @@ Thread hilo =new Thread(()->{
         e.printStackTrace();
         
     }
-    
+    }
     });
 
 
@@ -108,11 +119,12 @@ Thread hilo2=new Thread(()->{
       javax.swing.SwingUtilities.invokeLater(()->{
       lblMago2.setLocation(nuevax, lblMago2.getY());
       });
-  }
+  
   try{
-     Thread.sleep(personajes[0].getEscoba().getDormirSegundos()*100); 
+     Thread.sleep(personajes[1].getEscoba().getDormirSegundos()*200); 
   }catch(InterruptedException e){
       e.printStackTrace();
+  }
   }
 });
 hilo.start();
@@ -153,6 +165,7 @@ this.setVisible(false);
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIniciar;
     private javax.swing.JButton btnSalir;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblMago1;
     private javax.swing.JLabel lblMago2;
     // End of variables declaration//GEN-END:variables

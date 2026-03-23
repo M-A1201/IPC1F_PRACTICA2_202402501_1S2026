@@ -31,7 +31,7 @@ public class PersonajeController {
     harry.setNombre("Harry Potter");
     
     draco.setIdpersonaje(2);
-    draco.setCasa(Casa.SLYNERIN);
+    draco.setCasa(Casa.SLYTHERIN);
     draco.setEscoba(nimbus2001);
     draco.setNombre("Draco Malfoy");
     
