@@ -35,6 +35,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         lblMago2 = new javax.swing.JLabel();
         btnSalir = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        btnGraficar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,6 +53,9 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
         jLabel1.setText("META");
 
+        btnGraficar.setText("Graficar");
+        btnGraficar.addActionListener(this::btnGraficarActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -61,14 +65,16 @@ public class VistaPrincipal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblMago2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblMago1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(23, 23, 23))))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(23, 23, 23))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(202, Short.MAX_VALUE)
+                .addGap(48, 48, 48)
+                .addComponent(btnGraficar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnSalir)
                     .addComponent(btnIniciar))
@@ -86,7 +92,9 @@ public class VistaPrincipal extends javax.swing.JFrame {
                 .addGap(38, 38, 38)
                 .addComponent(btnIniciar)
                 .addGap(18, 18, 18)
-                .addComponent(btnSalir)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSalir)
+                    .addComponent(btnGraficar))
                 .addGap(49, 49, 49))
         );
 
@@ -142,6 +150,11 @@ hilo2.start();
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSalirActionPerformed
 
+    private void btnGraficarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficarActionPerformed
+String[][]datos=pContr
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGraficarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -168,6 +181,7 @@ hilo2.start();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnGraficar;
     private javax.swing.JButton btnIniciar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;

@@ -11,8 +11,13 @@ public class JuegoGuatemalaQuetzal {
     public static void main(String[] args) {
 
 //se crea una instancia del controlador de peronaje 
-        PersonajeController control=new PersonajeController();
-       //se agregan personajes 
+PersonajeController control=new PersonajeController();
+PersonajeController control2=new PersonajeController();       
+PartidaController pController=new PartidaController();
+pController.agregarPartidasQuemadas();
+
+
+//se agregan personajes 
         control.agregarPersonajesQuemados();
        
         //se crea la vista principal del juego 
