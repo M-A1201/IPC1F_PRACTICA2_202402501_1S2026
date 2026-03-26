@@ -10,6 +10,8 @@ public class PartidaController {
     
    public static PartidaModel[] partidas= new PartidaModel[100];
    
+   //contador de partidas almacenadas
+   public static int totalPartidas=0;
    public void agregarPartidasQuemadas(){
    PartidaModel partida1= new PartidaModel();
    PartidaModel partida2=new PartidaModel();
