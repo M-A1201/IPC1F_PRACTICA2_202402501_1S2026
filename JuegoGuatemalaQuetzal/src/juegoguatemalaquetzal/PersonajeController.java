@@ -15,7 +15,8 @@ public class PersonajeController {
         //creacion de objetos tipo personaje
     PersonajeModel harry =new PersonajeModel();
     PersonajeModel draco= new PersonajeModel();
-     
+    PersonajeModel ron= new PersonajeModel(); 
+    
     //creacion de objeto de tipo escoba
     EscobaModel nimbus2000=new EscobaModel();
     EscobaModel nimbus2001=new EscobaModel();
@@ -43,9 +44,16 @@ public class PersonajeController {
     
     
     //se almacena los personajes en el arreglo 
-    personajes[0]= harry;
-    personajes[1]=draco;
+    ron.setIdpersonaje(3);
+    ron.setCasa(Casa.GRIFINDOR);
+    ron.setNombre("Ron Weasley");
+    ron.setEscoba(nimbus2000);
     
+    
+    personajes[0]= harry;
+    
+    personajes[1]=draco;
+    personajes[2]=ron;
     
     }
     

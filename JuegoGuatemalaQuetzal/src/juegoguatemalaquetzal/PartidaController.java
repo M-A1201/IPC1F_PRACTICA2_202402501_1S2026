@@ -23,12 +23,14 @@ public class PartidaController {
    
    partida2.setIdPartida(2);
    partida2.setJugador1(personajes[0]);
-   partida2.setJugador2(personajes[1]);
+   partida2.setJugador2(personajes[2]);
    
    partida2.setPunteoJugador1(200);
    partida2.setPunteoJugador2(100);
    
-              
+   
+   
+   
    partidas[0]=partida1;
    partidas[1]=partida2;
    

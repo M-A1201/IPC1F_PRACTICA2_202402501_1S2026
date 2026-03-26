@@ -14,11 +14,12 @@ public class JuegoGuatemalaQuetzal {
 PersonajeController control=new PersonajeController();
 PersonajeController control2=new PersonajeController();       
 PartidaController pController=new PartidaController();
-pController.agregarPartidasQuemadas();
-
 
 //se agregan personajes 
         control.agregarPersonajesQuemados();
+        pController.agregarPartidasQuemadas();
+
+
        
         //se crea la vista principal del juego 
     VistaPrincipal vPrincipal=new VistaPrincipal();

@@ -4,7 +4,14 @@
  */
 package juegoguatemalaquetzal;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import static juegoguatemalaquetzal.PersonajeController.personajes;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
  *
@@ -36,6 +43,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         btnSalir = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btnGraficar = new javax.swing.JButton();
+        PnlGrafica = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,46 +64,66 @@ public class VistaPrincipal extends javax.swing.JFrame {
         btnGraficar.setText("Graficar");
         btnGraficar.addActionListener(this::btnGraficarActionPerformed);
 
+        javax.swing.GroupLayout PnlGraficaLayout = new javax.swing.GroupLayout(PnlGrafica);
+        PnlGrafica.setLayout(PnlGraficaLayout);
+        PnlGraficaLayout.setHorizontalGroup(
+            PnlGraficaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        PnlGraficaLayout.setVerticalGroup(
+            PnlGraficaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 239, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblMago2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblMago1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(23, 23, 23))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addComponent(btnGraficar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnSalir)
-                    .addComponent(btnIniciar))
-                .addGap(124, 124, 124))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblMago2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblMago1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(23, 23, 23))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(PnlGrafica, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnGraficar)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 327, Short.MAX_VALUE))))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnIniciar)))
+                .addGap(35, 35, 35)
+                .addComponent(btnSalir))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(43, 43, 43)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblMago1)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblMago1)))
+                .addGap(18, 18, 18)
                 .addComponent(lblMago2)
-                .addGap(38, 38, 38)
-                .addComponent(btnIniciar)
+                .addGap(95, 95, 95)
+                .addComponent(PnlGrafica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalir)
+                    .addComponent(btnIniciar)
                     .addComponent(btnGraficar))
-                .addGap(49, 49, 49))
+                .addGap(15, 15, 15))
         );
 
         pack();
@@ -151,8 +179,39 @@ hilo2.start();
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnGraficarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficarActionPerformed
-String[][]datos=pContr
-        // TODO add your handling code here:
+
+        PartidaController pController=new PartidaController();
+        String[][]datos =pController.datosGraficaPersonaje();
+        
+        DefaultCategoryDataset dataset=new DefaultCategoryDataset();
+     for(int i=0; i<datos.length; i++){
+      String nombre= datos[i][0];  
+      int puntos=Integer.parseInt(datos[i][1]);
+      
+      dataset.setValue(puntos, "punto total", nombre);
+     
+     }
+     JFreeChart grafica =ChartFactory.createBarChart(
+     "Ranking de jugadores",
+             "jugadores",
+     "punteo total",
+             dataset,
+             PlotOrientation.VERTICAL,
+             true,
+             true,
+             false
+             );
+ChartPanel panel=new ChartPanel(grafica);
+panel.setMouseWheelEnabled(true);
+panel.setPreferredSize(new Dimension(399,239));
+
+    PnlGrafica.removeAll();
+    PnlGrafica.setLayout(new BorderLayout());
+    PnlGrafica.add(panel, BorderLayout.CENTER);
+    PnlGrafica.revalidate();
+    PnlGrafica.repaint();
+    
+// TODO add your handling code here:
     }//GEN-LAST:event_btnGraficarActionPerformed
 
     /**
@@ -181,6 +240,7 @@ String[][]datos=pContr
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel PnlGrafica;
     private javax.swing.JButton btnGraficar;
     private javax.swing.JButton btnIniciar;
     private javax.swing.JButton btnSalir;
