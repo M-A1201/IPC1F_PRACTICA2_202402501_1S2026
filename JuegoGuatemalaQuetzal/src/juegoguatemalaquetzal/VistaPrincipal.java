@@ -260,7 +260,10 @@ new Thread(()->{
     nueva.setPunteoJugador1(puntosJ1[0]);
     nueva.setPunteoJugador2(puntosJ2[0]);
     
-    PartidaController.partidas[2]= nueva;
+    //guarda la partida en la siguiente posicion
+    PartidaController.partidas[PartidaController.totalPartidas]= nueva;
+    //incrementa el contador de partidas
+    PartidaController.totalPartidas++;
     System.out.println("partida guardada correctamente !! ");
 }).start();
 
