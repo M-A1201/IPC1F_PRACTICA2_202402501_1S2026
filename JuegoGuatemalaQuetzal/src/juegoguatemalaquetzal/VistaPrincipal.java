@@ -247,9 +247,12 @@ new Thread(()->{
         hilo.join();
         hilo2.join();
          }catch(Exception e){}
+    
     System.out.println("ganador: " + ganador[0]);
+    javax.swing.JOptionPane.showMessageDialog(null, "ganador: "+ ganador[0]);
   //se crea y se guarda una nueva partida con los resultados
-    PartidaModel nueva= new PartidaModel();
+  PartidaController PController=new PartidaController();
+  PartidaModel nueva= new PartidaModel();
     
     nueva.setIdPartida(3);
     nueva.setJugador1(personajes[0]);
