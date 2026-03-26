@@ -4,6 +4,15 @@
  */
 package juegoguatemalaquetzal;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import static juegoguatemalaquetzal.PersonajeController.personajes;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+
 /**
  *
  * @author Manuel
@@ -17,6 +26,8 @@ public class VistaJuego extends javax.swing.JFrame {
      */
     public VistaJuego() {
         initComponents();
+    lblMago1.setText(personajes[0].getNombre());
+    lblMago2.setText(personajes[1].getNombre());      
     }
 
     /**
@@ -28,21 +39,228 @@ public class VistaJuego extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnIniciar = new javax.swing.JButton();
+        lblMago1 = new javax.swing.JLabel();
+        lblMago2 = new javax.swing.JLabel();
+        lblGanador = new javax.swing.JLabel();
+        btnRegresar = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        btnIniciar.setText("INICIAR");
+        btnIniciar.addActionListener(this::btnIniciarActionPerformed);
+
+        lblMago1.setText("A");
+
+        lblMago2.setText("B");
+
+        lblGanador.setText("ganador :");
+
+        btnRegresar.setText("regresar");
+        btnRegresar.addActionListener(this::btnRegresarActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(126, Short.MAX_VALUE)
+                        .addComponent(btnRegresar)
+                        .addGap(12, 12, 12))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblMago2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblMago1, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblGanador, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnIniciar)
+                        .addGap(56, 56, 56)))
+                .addGap(29, 29, 29))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(lblGanador)
+                .addGap(11, 11, 11)
+                .addComponent(lblMago1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblMago2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 310, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnIniciar)
+                    .addComponent(btnRegresar))
+                .addGap(17, 17, 17))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
+ //puntos acumulados del jugador 1 y 2
+    btnIniciar.setEnabled(false);       
+     final int[] puntosJ1={0};
+        final int[] puntosJ2={0};
+
+        //indicar si ya hay un ganador en la carrera
+        final boolean[] ganadorDetectado= {false};
+        //se almacena el nombre del jugador ganador
+        final String[] ganador={""};
+        //se crea un hilo para el primer personaje
+        Thread hilo =new Thread(()->{
+            
+            //movimiento del personaje para moverse hacia la meta
+            for(int x=lblMago1.getX(); x<=this.getWidth()-100; x+=10){
+                if(ganadorDetectado[0])break;
+                int nuevax=x;
+                //se actualiza la posicion del peronaje en la interfaz grafica
+                javax.swing.SwingUtilities.invokeLater(()->{
+                    lblMago1.setLocation(nuevax, lblMago1.getY());
+                });
+                //objetos aleatorios
+                int random=(int)(Math.random()*20);
+
+                //gana automaticamente si gana la snitch
+                if(random==1){
+                    System.out.println("SNITCH encontrada!! ");
+                    
+                      ganadorDetectado[0]=true;
+                    ganador[0]="jugador 1";
+                   javax.swing.SwingUtilities.invokeLater(() -> { 
+                    lblMago1.setLocation(this.getWidth()-100, lblMago1.getY());
+                   });
+                    break;
+                    
+                }
+                //se detiene unos segundos si recoge al bludger
+                if(random==2){
+                    System.out.println("BLUDGER golpea jugador 1 ");
+                    try{
+                        Thread.sleep(2000);
+                    }catch(Exception e){}
+                }
+
+                //gana puntos si recoge a quaffle
+                if(random==3){
+                    puntosJ1[0] +=10;
+                    System.out.println("jugador 1 obtiene QUAFFLE +10 puntos : " + puntosJ1[0]);
+                }
+
+                //verificar si el jugador llego a la meta y gana
+                if(nuevax >= this.getWidth()-100 &&!ganadorDetectado[0]){
+                    ganador[0]= "Jugador 1";
+                    ganadorDetectado[0] = true;
+                }
+
+                try{
+                    //se pausa segun la velocidad de la escoba
+                    Thread.sleep(personajes[0].getEscoba().getDormirSegundos()*100);
+                }catch(InterruptedException e){
+                    e.printStackTrace();
+
+                }
+            }
+        });
+
+        //se crea el segundo hilo para el segundo peronaje
+        Thread hilo2=new Thread(()->{
+            
+//mueve al personaje hacia la meta en la interfaz
+            for(int x=lblMago2.getX(); x<=this.getWidth()-100; x+=10){
+                if(ganadorDetectado[0]) break;
+                int nuevax=x;
+                //actualiza la posicion del peronaje en la pantalla
+                javax.swing.SwingUtilities.invokeLater(()->{
+                    lblMago2.setLocation(nuevax, lblMago2.getY());
+                });
+
+                //objetos aleatorios
+                int random=(int)(Math.random()*20);
+
+                if(random==1){
+                    System.out.println("SNITCH encotrada!! ");
+                   
+                    ganadorDetectado[0]=true;
+                    ganador[0]="jugador 2";
+                    javax.swing.SwingUtilities.invokeLater(() -> {
+                    lblMago2.setLocation(this.getWidth()-100, lblMago2.getY());
+                    });
+                    break;
+
+                }
+
+                if(random==2){
+                    System.out.println("BLUDGER golpea jugador 2 ");
+                    try{
+                        Thread.sleep(2000);
+                    }catch(Exception e){}
+                }
+
+                if(random==3){
+                    puntosJ2[0] += 10;
+                    System.out.println("jugador 2 obtiene QUAFFLE +10 puntos "+ puntosJ2[0]);
+                }
+
+                if(nuevax >= this.getWidth()-100 && !ganadorDetectado[0]){
+                    ganador[0] = "Jugador 2";
+                    ganadorDetectado[0] = true;
+                }
+
+                try{
+                    Thread.sleep(personajes[1].getEscoba().getDormirSegundos()*100);
+                }catch(InterruptedException e){
+                    e.printStackTrace();
+                }
+            }
+        });
+        //se inician ambos hilos para ejecutar la carrera
+        hilo.start();
+        hilo2.start();
+
+        //hilo para que espere el resultado para guardar la partida
+        new Thread(()->{
+            try{
+                hilo.join();
+                hilo2.join();
+            }catch(Exception e){
+            e.printStackTrace();
+            }
+
+            System.out.println("ganador: " + ganador[0]);
+            
+            javax.swing.SwingUtilities.invokeLater(() -> {
+           lblGanador.setText(" Ganador: " + ganador[0]);
+            javax.swing.JOptionPane.showMessageDialog(null, "ganador: "+ ganador[0]);
+            //se crea y se guarda una nueva partida con los resultados
+              PartidaModel nueva= new PartidaModel();
+
+            nueva.setIdPartida(3);
+            nueva.setJugador1(personajes[0]);
+            nueva.setJugador2(personajes[1]);
+            nueva.setPunteoJugador1(puntosJ1[0]);
+            nueva.setPunteoJugador2(puntosJ2[0]);
+
+            //guarda la partida en la siguiente posicion
+            PartidaController.partidas[PartidaController.totalPartidas]= nueva;
+            //incrementa el contador de partidas
+            PartidaController.totalPartidas++;
+          btnIniciar.setEnabled(true);
+          //  System.out.println("partida guardada correctamente !! ");
+        });
+
+        }).start();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnIniciarActionPerformed
+
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+this.setVisible(false);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegresarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -70,5 +288,10 @@ public class VistaJuego extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnIniciar;
+    private javax.swing.JButton btnRegresar;
+    private javax.swing.JLabel lblGanador;
+    private javax.swing.JLabel lblMago1;
+    private javax.swing.JLabel lblMago2;
     // End of variables declaration//GEN-END:variables
 }

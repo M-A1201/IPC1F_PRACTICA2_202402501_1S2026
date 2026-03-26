@@ -8,13 +8,17 @@ import static juegoguatemalaquetzal.PersonajeController.personajes;
 public class PartidaController {
     
     
+    
    public static PartidaModel[] partidas= new PartidaModel[100];
+   
    
    //contador de partidas almacenadas
    public static int totalPartidas=0;
    public void agregarPartidasQuemadas(){
    PartidaModel partida1= new PartidaModel();
    PartidaModel partida2=new PartidaModel();
+   partidas[0]=partida1;
+   partidas[1]=partida2;
    
    partida1.setIdPartida(1);
    partida1.setJugador1(personajes[0]);
@@ -35,7 +39,7 @@ public class PartidaController {
    
    partidas[0]=partida1;
    partidas[1]=partida2;
-   
+  totalPartidas=2; 
    
    }
    

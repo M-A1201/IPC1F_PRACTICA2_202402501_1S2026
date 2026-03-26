@@ -37,93 +37,62 @@ public class VistaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnIniciar = new javax.swing.JButton();
-        lblMago1 = new javax.swing.JLabel();
-        lblMago2 = new javax.swing.JLabel();
         btnSalir = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        btnGraficar = new javax.swing.JButton();
-        PnlGrafica = new javax.swing.JPanel();
+        btnJugar = new javax.swing.JButton();
+        btnVerTop = new javax.swing.JButton();
+        btnReporte = new javax.swing.JButton();
+        btnCrearPersonaje = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        btnIniciar.setText("INIICIAR");
-        btnIniciar.addActionListener(this::btnIniciarActionPerformed);
-
-        lblMago1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        lblMago1.setText("o");
-
-        lblMago2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lblMago2.setText("D");
 
         btnSalir.setText("SALIR");
         btnSalir.addActionListener(this::btnSalirActionPerformed);
 
-        jLabel1.setText("META");
+        btnJugar.setText("JUGAR");
+        btnJugar.addActionListener(this::btnJugarActionPerformed);
 
-        btnGraficar.setText("Graficar");
-        btnGraficar.addActionListener(this::btnGraficarActionPerformed);
+        btnVerTop.setText("VER TOP DE PERSONAJES");
+        btnVerTop.addActionListener(this::btnVerTopActionPerformed);
 
-        javax.swing.GroupLayout PnlGraficaLayout = new javax.swing.GroupLayout(PnlGrafica);
-        PnlGrafica.setLayout(PnlGraficaLayout);
-        PnlGraficaLayout.setHorizontalGroup(
-            PnlGraficaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        PnlGraficaLayout.setVerticalGroup(
-            PnlGraficaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 239, Short.MAX_VALUE)
-        );
+        btnReporte.setText("REPORTE DE PARTIDAS");
+        btnReporte.addActionListener(this::btnReporteActionPerformed);
+
+        btnCrearPersonaje.setText("CREAR PERSONAJE ");
+        btnCrearPersonaje.addActionListener(this::btnCrearPersonajeActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblMago2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblMago1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(23, 23, 23))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(PnlGrafica, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(btnGraficar)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 327, Short.MAX_VALUE))))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnIniciar)))
-                .addGap(35, 35, 35)
-                .addComponent(btnSalir))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnJugar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnReporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnCrearPersonaje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnVerTop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(36, 36, 36)
+                .addComponent(btnSalir)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblMago1)))
-                .addGap(18, 18, 18)
-                .addComponent(lblMago2)
-                .addGap(89, 89, 89)
-                .addComponent(PnlGrafica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(102, 102, 102)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSalir)
-                    .addComponent(btnIniciar)
-                    .addComponent(btnGraficar))
-                .addGap(15, 15, 15))
+                    .addComponent(btnCrearPersonaje, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnJugar, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnVerTop, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(67, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(144, 144, 144))
         );
 
         pack();
@@ -135,186 +104,36 @@ public class VistaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSalirActionPerformed
 
-    private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
+    private void btnJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJugarActionPerformed
+//==================================================================
+        VistaJuego vjuego = new VistaJuego();
+    vjuego.setVisible(true);
+    //................this.dispose(); // cierra el menú actual
 
-        //puntos acumulados del jugador 1 y 2
-        final int[] puntosJ1={0};
-        final int[] puntosJ2={0};
-
-        //indicar si ya hay un ganador en la carrera
-        final boolean[] ganadorDetectado= {false};
-        //se almacena el nombre del jugador ganador
-        final String[] ganador={""};
-        //se crea un hilo para el primer personaje
-        Thread hilo =new Thread(()->{
-            //movimiento del personaje para moverse hacia la meta
-            for(int x=lblMago1.getX(); x<=this.getWidth()-100; x+=10){
-                int nuevax=x;
-                //se actualiza la posicion del peronaje en la interfaz grafica
-                javax.swing.SwingUtilities.invokeLater(()->{
-                    lblMago1.setLocation(nuevax, lblMago1.getY());
-                });
-                //objetos aleatorios
-                int random=(int)(Math.random()*20);
-
-                //gana automaticamente si gana la snitch
-                if(random==1){
-                    System.out.println("SNITCH para jugador 1 ");
-                    lblMago1.setLocation(this.getWidth()-100, lblMago1.getY());
-                    ganadorDetectado[0]=true;
-                    ganador[0]="jugador 1";
-                    break;
-
-                }
-                //se detiene unos segundos si recoge al bludger
-                if(random==2){
-                    System.out.println("BLUDGER golpea jugador 1 ");
-                    try{
-                        Thread.sleep(2000);
-                    }catch(Exception e){}
-                }
-
-                //gana puntos si recoge a quaffle
-                if(random==3){
-                    puntosJ1[0] +=10;
-                    System.out.println("QUAFFLE +10 puntos jugador 1: " + puntosJ1[0]);
-                }
-
-                //verificar si el jugador llego a la meta y gana
-                if(nuevax >= this.getWidth()-100 &&!ganadorDetectado[0]){
-                    ganador[0]= "Jugador 1";
-                    ganadorDetectado[0] = true;
-                }
-
-                try{
-                    //se pausa segun la velocidad de la escoba
-                    Thread.sleep(personajes[0].getEscoba().getDormirSegundos()*100);
-                }catch(InterruptedException e){
-                    e.printStackTrace();
-
-                }
-            }
-        });
-
-        //se crea el segundo hilo para el segundo peronaje
-        Thread hilo2=new Thread(()->{
-            //mueve al personaje hacia la meta en la interfaz
-            for(int x=lblMago2.getX(); x<=this.getWidth()-100; x+=10){
-                int nuevax=x;
-                //actualiza la posicion del peronaje en la pantalla
-                javax.swing.SwingUtilities.invokeLater(()->{
-                    lblMago2.setLocation(nuevax, lblMago2.getY());
-                });
-
-                //objetos aleatorios
-                int random=(int)(Math.random()*20);
-
-                if(random==1){
-                    System.out.println("SNITCH para jugador 2 ");
-                    lblMago2.setLocation(this.getWidth()-100, lblMago2.getY());
-                    ganadorDetectado[0]=true;
-                    ganador[0]="jugador 2";
-                    break;
-
-                }
-
-                if(random==2){
-                    System.out.println("BLUDGER golpea jugador 2 ");
-                    try{
-                        Thread.sleep(2000);
-                    }catch(Exception e){}
-                }
-
-                if(random==3){
-                    puntosJ2[0] += 10;
-                    System.out.println("QUAFFLE +10 puntos jugador 2"+ puntosJ2[0]);
-                }
-
-                if(nuevax >= this.getWidth()-100 && !ganadorDetectado[0]){
-                    ganador[0] = "Jugador 2";
-                    ganadorDetectado[0] = true;
-                }
-
-                try{
-                    Thread.sleep(personajes[1].getEscoba().getDormirSegundos()*200);
-                }catch(InterruptedException e){
-                    e.printStackTrace();
-                }
-            }
-        });
-        //se inician ambos hilos para ejecutar la carrera
-        hilo.start();
-        hilo2.start();
-
-        //hilo para que espere el resultado para guardar la partida
-        new Thread(()->{
-            try{
-                hilo.join();
-                hilo2.join();
-            }catch(Exception e){}
-
-            System.out.println("ganador: " + ganador[0]);
-            javax.swing.JOptionPane.showMessageDialog(null, "ganador: "+ ganador[0]);
-            //se crea y se guarda una nueva partida con los resultados
-            PartidaController PController=new PartidaController();
-            PartidaModel nueva= new PartidaModel();
-
-            nueva.setIdPartida(3);
-            nueva.setJugador1(personajes[0]);
-            nueva.setJugador2(personajes[1]);
-            nueva.setPunteoJugador1(puntosJ1[0]);
-            nueva.setPunteoJugador2(puntosJ2[0]);
-
-            //guarda la partida en la siguiente posicion
-            PartidaController.partidas[PartidaController.totalPartidas]= nueva;
-            //incrementa el contador de partidas
-            PartidaController.totalPartidas++;
-            System.out.println("partida guardada correctamente !! ");
-        }).start();
 
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnIniciarActionPerformed
+    }//GEN-LAST:event_btnJugarActionPerformed
 
-    private void btnGraficarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficarActionPerformed
-        //crear un objeto para el controlador de partidas
-        PartidaController pController=new PartidaController();
-        // matriz para los nombres y puntajes
-        String[][]datos =pController.datosGraficaPersonaje();
-        //objeto para almacenar datos de la grafica
-        DefaultCategoryDataset dataset=new DefaultCategoryDataset();
-        //recorrer la matriz para guardar los datos
-        for(int i=0; i<datos.length; i++){
-            String nombre= datos[i][0];
-            int puntos=Integer.parseInt(datos[i][1]);
-            //se agregan los datos a la grafica
-            dataset.setValue(puntos, "punto total", nombre);
+    private void btnVerTopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerTopActionPerformed
+    VistaTop vRanking= new VistaTop();
+    vRanking.setVisible(true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVerTopActionPerformed
 
-        }
-        //objeto para graficar una de estilo barras
-        JFreeChart grafica =ChartFactory.createBarChart(
-            "Ranking de jugadores",
-            "jugadores",
-            "punteo total",
-            dataset,
-            PlotOrientation.VERTICAL,
-            true,
-            true,
-            false
-        );
+    private void btnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteActionPerformed
+  VistaHistorial vh = new VistaHistorial();
+    vh.setVisible(true);
 
-        ChartPanel panel=new ChartPanel(grafica);
-        panel.setMouseWheelEnabled(true);
-        panel.setPreferredSize(new Dimension(399,239));
-
-        //actualizamos el panel mostrando la grafica
-        PnlGrafica.removeAll();
-        PnlGrafica.setLayout(new BorderLayout());
-        PnlGrafica.add(panel, BorderLayout.CENTER);
-        PnlGrafica.revalidate();
-        PnlGrafica.repaint();
 
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnGraficarActionPerformed
+    }//GEN-LAST:event_btnReporteActionPerformed
+
+    private void btnCrearPersonajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearPersonajeActionPerformed
+  VistaCrearPersonaje v = new VistaCrearPersonaje();
+    v.setVisible(true);
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCrearPersonajeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -338,16 +157,15 @@ public class VistaPrincipal extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new VistaPrincipal().setVisible(true));
+     java.awt.EventQueue.invokeLater(() -> new VistaPrincipal().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel PnlGrafica;
-    private javax.swing.JButton btnGraficar;
-    private javax.swing.JButton btnIniciar;
+    private javax.swing.JButton btnCrearPersonaje;
+    private javax.swing.JButton btnJugar;
+    private javax.swing.JButton btnReporte;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel lblMago1;
-    private javax.swing.JLabel lblMago2;
+    private javax.swing.JButton btnVerTop;
     // End of variables declaration//GEN-END:variables
+
 }
