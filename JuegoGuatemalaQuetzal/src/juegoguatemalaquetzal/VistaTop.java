@@ -4,10 +4,21 @@
  */
 package juegoguatemalaquetzal;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
+import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
@@ -17,91 +28,110 @@ import org.jfree.data.category.DefaultCategoryDataset;
  * @author Manuel
  */
 public class VistaTop extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaTop.class.getName());
+
+    JFreeChart grafica;
 
     /**
      * Creates new form VistaRanking
      */
+    //constructor ya creado por la clase
     public VistaTop() {
         initComponents();
-         mostrarGrafica();
+        //llamada al metodo que muestra la grafica en pantalla 
+        mostrarGrafica();
     }
+//metodo para crear la grafica 
+    public void mostrarGrafica() {
+       //controlador para obtener los datos de las partidas
+        PartidaController pController = new PartidaController();
+        String[][] datos = pController.datosGraficaPersonaje();
+     //se guardan los datos para la grafica
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        //recorrer los datos para agregarlos 
+        for (int i = 0; i < datos.length; i++) {
+            String nombre = datos[i][0];
+            int puntos = Integer.parseInt(datos[i][1]);
+            dataset.setValue(puntos, "puntos", nombre);
+        }
+       //se crea la grafica de barras 
+        grafica = ChartFactory.createBarChart(
+                "top de personajes por puntos",
+                "jugadores",
+                "punteo total",
+                dataset,
+                PlotOrientation.VERTICAL,
+                true,
+                true,
+                false
+        );
 
-public void mostrarGrafica() {
-    PartidaController pController = new PartidaController();
-    String[][] datos = pController.datosGraficaPersonaje();
+        //cambiar de color  a la grafica para darle mas estilo
+        grafica.setBackgroundPaint(java.awt.Color.white);
+        grafica.getCategoryPlot().setBackgroundPaint(new java.awt.Color(230, 230, 250));
+        grafica.getCategoryPlot().getRenderer().setSeriesPaint(0, new java.awt.Color(0, 102, 204));
+        //enviamos que en el panel se crea la grafica
+        ChartPanel panel = new ChartPanel(grafica);
+        panel.setMouseWheelEnabled(true);
+        panel.setPreferredSize(new Dimension(500, 300));
 
-    DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-    for (int i = 0; i < datos.length; i++) {
-        String nombre = datos[i][0];
-        int puntos = Integer.parseInt(datos[i][1]);
-        dataset.setValue(puntos, "puntos", nombre);
+        PnlGrafica.removeAll();
+        PnlGrafica.setLayout(new BorderLayout());
+        PnlGrafica.add(panel, BorderLayout.CENTER);
+        PnlGrafica.revalidate();
+        PnlGrafica.repaint();
     }
-
-    JFreeChart grafica = ChartFactory.createBarChart( 
-       "top de personajes por puntos",
-        "jugadores",
-        "punteo total",
-        dataset,
-        PlotOrientation.VERTICAL,
-        true,
-        true,
-        false
-    
-    );
-    
-    //cambiar de color  a la grafica para darle mas estilo
-         grafica.setBackgroundPaint(java.awt.Color.white);
-         grafica.getCategoryPlot().setBackgroundPaint(new java.awt.Color(230,230,250));
-         grafica.getCategoryPlot().getRenderer().setSeriesPaint(0, new java.awt.Color(0,102,204));
-   //enviamos que en el panel se crea la grafica
-    ChartPanel panel = new ChartPanel(grafica);
-    panel.setMouseWheelEnabled(true);
-    panel.setPreferredSize(new Dimension(500, 300));
-
-    PnlGrafica.removeAll();
-    PnlGrafica.setLayout(new BorderLayout());
-    PnlGrafica.add(panel, BorderLayout.CENTER);
-    PnlGrafica.revalidate();
-    PnlGrafica.repaint();
-}
 //metodo para generar un documento con el top de jugadores
-public void exportarPDF() {
+
+    public void exportarPDF() {
         try {
-            //crear el documento pdf
-            com.itextpdf.text.Document documento = new com.itextpdf.text.Document();
-            //se guardara el archibo pdf
-            com.itextpdf.text.pdf.PdfWriter.getInstance(
-                documento,
-                 new java.io.FileOutputStream("TopJugadores.pdf")
+            Document documento = new Document();
+
+            PdfWriter.getInstance(
+                    documento,
+                    new FileOutputStream("TopJugadores.pdf")
             );
 
             documento.open();
-               //agregar titulo al pdf
-            documento.add(new com.itextpdf.text.Paragraph("TOP DE JUGADORES\n\n"));
-            //obtener los datos del ranking desde controlador
+
+            // crear imagen de la grafica en memoria (SIN archivo PNG)
+            BufferedImage bufferedImage = grafica.createBufferedImage(500, 300);
+
+            // convertir a bytes
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(bufferedImage, "png", baos);
+
+            // convertir a imagen de iText
+            Image imagen = Image.getInstance(baos.toByteArray());
+
+            // ajustar tamaño
+            imagen.scaleToFit(500, 300);
+
+            // agregar al PDF
+            documento.add(imagen);
+            documento.add(new Paragraph("\n"));
+
+            // titulo del documento
+            documento.add(new Paragraph("TOP DE JUGADORES\n\n"));
+              //obtenemos los datos 
             PartidaController pc = new PartidaController();
             String[][] datos = pc.datosGraficaPersonaje();
-
+                //recorrer datos y agregar al pdf
             for (int i = 0; i < datos.length; i++) {
-                documento.add(new com.itextpdf.text.Paragraph(
-                    datos[i][0] + " - " + datos[i][1] + " puntos"
+                documento.add(new Paragraph(
+                        datos[i][0] + " - " + datos[i][1] + " puntos"
                 ));
             }
-
+             //cerrar el documento
             documento.close();
-             //mostar un mensaje que ya se guardo el documento pdf
-            javax.swing.JOptionPane.showMessageDialog(null, "PDF generado correctamente");
+           //mensaje de que se guardo el documento pdf
+            JOptionPane.showMessageDialog(null, "PDF generado correctamente");
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-}
-
-
-
-
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -167,12 +197,12 @@ public void exportarPDF() {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-this.setVisible(false);
+        this.setVisible(false);
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportarActionPerformed
-exportarPDF();
+        exportarPDF();
         // TODO add your handling code here:
     }//GEN-LAST:event_btnExportarActionPerformed
 

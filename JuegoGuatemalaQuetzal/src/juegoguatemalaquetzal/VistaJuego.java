@@ -240,7 +240,7 @@ public class VistaJuego extends javax.swing.JFrame {
 
                 try {
                     //se pausa segun la velocidad de la escoba
-                    Thread.sleep(personajes[jugador1Index].getEscoba().getDormirSegundos() * 1000);
+                    Thread.sleep(personajes[jugador1Index].getEscoba().getDormirSegundos() * 100);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
 
@@ -296,7 +296,7 @@ public class VistaJuego extends javax.swing.JFrame {
                 }
 
                 try {
-                    Thread.sleep(personajes[jugador2Index].getEscoba().getDormirSegundos() * 1000);
+                    Thread.sleep(personajes[jugador2Index].getEscoba().getDormirSegundos() * 100);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
