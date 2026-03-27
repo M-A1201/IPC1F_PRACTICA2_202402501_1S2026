@@ -38,33 +38,34 @@ public class VistaJuego extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaJuego.class.getName());
     //metodo que selecciona dos personajes aliatorios para la partida
+    
+    
     private void seleccionarPersonajes(){
-int totalPersonajes=0;       
-      //contamos los personajes existentes
-        for (int i = 0; i < personajes.length; i++) {
-            if (personajes[i] != null) {
-                totalPersonajes++;
-            }
 
-        }
-        //elegir jugador de forma aleatorio
-        jugador1Index = (int)(Math.random()*totalPersonajes);
-        //oponente aleatorio 
-        jugador2Index = (int) (Math.random() * totalPersonajes);
+    // obtener nombre seleccionado del combo
+    String nombreSeleccionado = jComboBox1.getSelectedItem().toString();
 
-        //para que los jugadores no sean los mismos 
-        while (jugador2Index == jugador1Index) {
-            jugador2Index = (int) (Math.random() * totalPersonajes);
+    // buscar ese personaje en el arreglo
+    for (int i = 0; i < personajes.length; i++) {
+        if (personajes[i] != null && personajes[i].getNombre().equals(nombreSeleccionado)) {
+            jugador1Index = i;
+            break;
         }
-        //agregar nombre nuevo
-       // lblMago1.setText(personajes[jugador1Index].getNombre());
-        //lblMago2.setText(personajes[jugador2Index].getNombre()); 
-        
     }
-    
 
-    
-    
+    // contar personajes existentes
+    int totalPersonajes = 0;
+    for (int i = 0; i < personajes.length; i++) {
+        if (personajes[i] != null) {
+            totalPersonajes++;
+        }
+    }
+
+    // oponente aleatorio (pero distinto al jugador)
+    do {
+        jugador2Index = (int)(Math.random() * totalPersonajes);
+    } while (jugador2Index == jugador1Index);
+} 
     /**
      * Creates new form VistaJuego
      */
@@ -72,11 +73,6 @@ int totalPersonajes=0;
         initComponents();
 //cargamos los jugadores para elejir jugador
     cargarJugadores(); 
-
-       //mostrar nombre de los personajes en pantalla 
-    lblMago1.setText("A-"+ personajes[jugador1Index].getNombre());
-    lblMago2.setText("B-"+ personajes[jugador2Index].getNombre());
-    
     }
 
     /**
@@ -213,6 +209,7 @@ int totalPersonajes=0;
                 if (random == 1) {
                     System.out.println("SNITCH encontrada!! ");
                     ganadorDetectado[0] = true;
+                    puntosJ1[0]+=150;
                     ganador[0] = personajes[jugador1Index].getNombre();
                     javax.swing.SwingUtilities.invokeLater(() -> {
                     lblMago1.setLocation(this.getWidth() - 100, lblMago1.getY());
@@ -243,7 +240,7 @@ int totalPersonajes=0;
 
                 try {
                     //se pausa segun la velocidad de la escoba
-                    Thread.sleep(personajes[jugador1Index].getEscoba().getDormirSegundos() * 100);
+                    Thread.sleep(personajes[jugador1Index].getEscoba().getDormirSegundos() * 1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
 
@@ -270,8 +267,8 @@ int totalPersonajes=0;
 
                 if (random == 1) {
                     System.out.println("SNITCH encotrada!! ");
-
                     ganadorDetectado[0] = true;
+                    puntosJ2[0]+=150;
                     ganador[0] = personajes[jugador2Index].getNombre();
                     javax.swing.SwingUtilities.invokeLater(() -> {
                         lblMago2.setLocation(this.getWidth() - 100, lblMago2.getY());
@@ -299,7 +296,7 @@ int totalPersonajes=0;
                 }
 
                 try {
-                    Thread.sleep(personajes[jugador2Index].getEscoba().getDormirSegundos() * 100);
+                    Thread.sleep(personajes[jugador2Index].getEscoba().getDormirSegundos() * 1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
