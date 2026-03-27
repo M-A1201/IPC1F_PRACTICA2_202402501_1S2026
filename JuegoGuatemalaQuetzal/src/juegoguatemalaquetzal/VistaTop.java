@@ -52,7 +52,7 @@ public void mostrarGrafica() {
     );
     
     //cambiar de color  a la grafica para darle mas estilo
- grafica.setBackgroundPaint(java.awt.Color.white);
+         grafica.setBackgroundPaint(java.awt.Color.white);
          grafica.getCategoryPlot().setBackgroundPaint(new java.awt.Color(230,230,250));
          grafica.getCategoryPlot().getRenderer().setSeriesPaint(0, new java.awt.Color(0,102,204));
    //enviamos que en el panel se crea la grafica
@@ -66,6 +66,43 @@ public void mostrarGrafica() {
     PnlGrafica.revalidate();
     PnlGrafica.repaint();
 }
+//metodo para generar un documento con el top de jugadores
+public void exportarPDF() {
+        try {
+            //crear el documento pdf
+            com.itextpdf.text.Document documento = new com.itextpdf.text.Document();
+            //se guardara el archibo pdf
+            com.itextpdf.text.pdf.PdfWriter.getInstance(
+                documento,
+                 new java.io.FileOutputStream("TopJugadores.pdf")
+            );
+
+            documento.open();
+               //agregar titulo al pdf
+            documento.add(new com.itextpdf.text.Paragraph("TOP DE JUGADORES\n\n"));
+            //obtener los datos del ranking desde controlador
+            PartidaController pc = new PartidaController();
+            String[][] datos = pc.datosGraficaPersonaje();
+
+            for (int i = 0; i < datos.length; i++) {
+                documento.add(new com.itextpdf.text.Paragraph(
+                    datos[i][0] + " - " + datos[i][1] + " puntos"
+                ));
+            }
+
+            documento.close();
+             //mostar un mensaje que ya se guardo el documento pdf
+            javax.swing.JOptionPane.showMessageDialog(null, "PDF generado correctamente");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+}
+
+
+
+
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -77,6 +114,7 @@ public void mostrarGrafica() {
 
         PnlGrafica = new javax.swing.JPanel();
         btnSalir = new javax.swing.JButton();
+        btnExportar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -94,6 +132,9 @@ public void mostrarGrafica() {
         btnSalir.setText("salir");
         btnSalir.addActionListener(this::btnSalirActionPerformed);
 
+        btnExportar.setText("EXPORTAR PDF");
+        btnExportar.addActionListener(this::btnExportarActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -101,7 +142,9 @@ public void mostrarGrafica() {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(272, 272, 272)
+                        .addGap(121, 121, 121)
+                        .addComponent(btnExportar)
+                        .addGap(76, 76, 76)
                         .addComponent(btnSalir))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -114,7 +157,9 @@ public void mostrarGrafica() {
                 .addContainerGap(101, Short.MAX_VALUE)
                 .addComponent(PnlGrafica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnSalir)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSalir)
+                    .addComponent(btnExportar))
                 .addGap(31, 31, 31))
         );
 
@@ -125,6 +170,11 @@ public void mostrarGrafica() {
 this.setVisible(false);
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void btnExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportarActionPerformed
+exportarPDF();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnExportarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -153,6 +203,7 @@ this.setVisible(false);
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PnlGrafica;
+    private javax.swing.JButton btnExportar;
     private javax.swing.JButton btnSalir;
     // End of variables declaration//GEN-END:variables
 }
