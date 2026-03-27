@@ -18,17 +18,45 @@ import org.jfree.data.category.DefaultCategoryDataset;
  * @author Manuel
  */
 public class VistaJuego extends javax.swing.JFrame {
-    
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaJuego.class.getName());
 
+    //variables globales
+    int jugador1Index;
+    int jugador2Index;
+
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaJuego.class.getName());
+    private void seleccionarPersonajes(){
+int totalPersonajes=0;       
+      //contamos los personajes existentes
+        for (int i = 0; i < personajes.length; i++) {
+            if (personajes[i] != null) {
+                totalPersonajes++;
+            }
+
+        }
+        //elegir jugador
+        jugador1Index = 0;
+        //oponente aleatorio
+        jugador2Index = (int) (Math.random() * totalPersonajes);
+
+        //para que los jugadores no sean los mismos 
+        while (jugador2Index == jugador1Index) {
+            jugador2Index = (int) (Math.random() * totalPersonajes);
+        }
+        //agregar nombre nuevo
+       // lblMago1.setText(personajes[jugador1Index].getNombre());
+        //lblMago2.setText(personajes[jugador2Index].getNombre()); 
+        
+    }
+    
+
+    
+    
     /**
      * Creates new form VistaJuego
      */
     public VistaJuego() {
         initComponents();
-    lblMago1.setText(personajes[0].getNombre());
-    lblMago2.setText(personajes[1].getNombre());      
-    }
+        }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -102,65 +130,74 @@ public class VistaJuego extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
- //puntos acumulados del jugador 1 y 2
-    btnIniciar.setEnabled(false);       
-     final int[] puntosJ1={0};
-        final int[] puntosJ2={0};
+      //invocar el metodo para seleccionar personajes aleatorios 
+      seleccionarPersonajes();
+      //mostrar el nombre del juador 
+      lblMago1.setText(personajes[jugador1Index].getNombre());
+      lblMago2.setText(personajes[jugador2Index].getNombre());
+              
+//puntos acumulados del jugador 1 y 2
+        btnIniciar.setEnabled(false);
+        final int[] puntosJ1 = {0};
+        final int[] puntosJ2 = {0};
 
         //indicar si ya hay un ganador en la carrera
-        final boolean[] ganadorDetectado= {false};
+        final boolean[] ganadorDetectado = {false};
         //se almacena el nombre del jugador ganador
-        final String[] ganador={""};
+        final String[] ganador = {""};
         //se crea un hilo para el primer personaje
-        Thread hilo =new Thread(()->{
-            
+        Thread hilo = new Thread(() -> {
+
             //movimiento del personaje para moverse hacia la meta
-            for(int x=lblMago1.getX(); x<=this.getWidth()-100; x+=10){
-                if(ganadorDetectado[0])break;
-                int nuevax=x;
+            for (int x = lblMago1.getX(); x <= this.getWidth() - 100; x += 10) {
+                if (ganadorDetectado[0]) {
+                    break;
+                }
+                int nuevax = x;
                 //se actualiza la posicion del peronaje en la interfaz grafica
-                javax.swing.SwingUtilities.invokeLater(()->{
+                javax.swing.SwingUtilities.invokeLater(() -> {
                     lblMago1.setLocation(nuevax, lblMago1.getY());
                 });
                 //objetos aleatorios
-                int random=(int)(Math.random()*20);
+                int random = (int) (Math.random() * 20);
 
                 //gana automaticamente si gana la snitch
-                if(random==1){
+                if (random == 1) {
                     System.out.println("SNITCH encontrada!! ");
-                    
-                      ganadorDetectado[0]=true;
-                    ganador[0]="jugador 1";
-                   javax.swing.SwingUtilities.invokeLater(() -> { 
-                    lblMago1.setLocation(this.getWidth()-100, lblMago1.getY());
-                   });
+
+                    ganadorDetectado[0] = true;
+                    ganador[0] = "jugador 1";
+                    javax.swing.SwingUtilities.invokeLater(() -> {
+                        lblMago1.setLocation(this.getWidth() - 100, lblMago1.getY());
+                    });
                     break;
-                    
+
                 }
                 //se detiene unos segundos si recoge al bludger
-                if(random==2){
+                if (random == 2) {
                     System.out.println("BLUDGER golpea jugador 1 ");
-                    try{
+                    try {
                         Thread.sleep(2000);
-                    }catch(Exception e){}
+                    } catch (Exception e) {
+                    }
                 }
 
                 //gana puntos si recoge a quaffle
-                if(random==3){
-                    puntosJ1[0] +=10;
+                if (random == 3) {
+                    puntosJ1[0] += 10;
                     System.out.println("jugador 1 obtiene QUAFFLE +10 puntos : " + puntosJ1[0]);
                 }
 
                 //verificar si el jugador llego a la meta y gana
-                if(nuevax >= this.getWidth()-100 &&!ganadorDetectado[0]){
-                    ganador[0]= "Jugador 1";
+                if (nuevax >= this.getWidth() - 100 && !ganadorDetectado[0]) {
+                    ganador[0] = "Jugador 1";
                     ganadorDetectado[0] = true;
                 }
 
-                try{
+                try {
                     //se pausa segun la velocidad de la escoba
-                    Thread.sleep(personajes[0].getEscoba().getDormirSegundos()*100);
-                }catch(InterruptedException e){
+                    Thread.sleep(personajes[jugador1Index].getEscoba().getDormirSegundos() * 100);
+                } catch (InterruptedException e) {
                     e.printStackTrace();
 
                 }
@@ -168,52 +205,55 @@ public class VistaJuego extends javax.swing.JFrame {
         });
 
         //se crea el segundo hilo para el segundo peronaje
-        Thread hilo2=new Thread(()->{
-            
+        Thread hilo2 = new Thread(() -> {
+
 //mueve al personaje hacia la meta en la interfaz
-            for(int x=lblMago2.getX(); x<=this.getWidth()-100; x+=10){
-                if(ganadorDetectado[0]) break;
-                int nuevax=x;
+            for (int x = lblMago2.getX(); x <= this.getWidth() - 100; x += 10) {
+                if (ganadorDetectado[0]) {
+                    break;
+                }
+                int nuevax = x;
                 //actualiza la posicion del peronaje en la pantalla
-                javax.swing.SwingUtilities.invokeLater(()->{
+                javax.swing.SwingUtilities.invokeLater(() -> {
                     lblMago2.setLocation(nuevax, lblMago2.getY());
                 });
 
                 //objetos aleatorios
-                int random=(int)(Math.random()*20);
+                int random = (int) (Math.random() * 20);
 
-                if(random==1){
+                if (random == 1) {
                     System.out.println("SNITCH encotrada!! ");
-                   
-                    ganadorDetectado[0]=true;
-                    ganador[0]="jugador 2";
+
+                    ganadorDetectado[0] = true;
+                    ganador[0] = "jugador 2";
                     javax.swing.SwingUtilities.invokeLater(() -> {
-                    lblMago2.setLocation(this.getWidth()-100, lblMago2.getY());
+                        lblMago2.setLocation(this.getWidth() - 100, lblMago2.getY());
                     });
                     break;
 
                 }
 
-                if(random==2){
+                if (random == 2) {
                     System.out.println("BLUDGER golpea jugador 2 ");
-                    try{
+                    try {
                         Thread.sleep(2000);
-                    }catch(Exception e){}
+                    } catch (Exception e) {
+                    }
                 }
 
-                if(random==3){
+                if (random == 3) {
                     puntosJ2[0] += 10;
-                    System.out.println("jugador 2 obtiene QUAFFLE +10 puntos "+ puntosJ2[0]);
+                    System.out.println("jugador 2 obtiene QUAFFLE +10 puntos " + puntosJ2[0]);
                 }
 
-                if(nuevax >= this.getWidth()-100 && !ganadorDetectado[0]){
+                if (nuevax >= this.getWidth() - 100 && !ganadorDetectado[0]) {
                     ganador[0] = "Jugador 2";
                     ganadorDetectado[0] = true;
                 }
 
-                try{
-                    Thread.sleep(personajes[1].getEscoba().getDormirSegundos()*100);
-                }catch(InterruptedException e){
+                try {
+                    Thread.sleep(personajes[jugador2Index].getEscoba().getDormirSegundos() * 100);
+                } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
@@ -223,42 +263,42 @@ public class VistaJuego extends javax.swing.JFrame {
         hilo2.start();
 
         //hilo para que espere el resultado para guardar la partida
-        new Thread(()->{
-            try{
+        new Thread(() -> {
+            try {
                 hilo.join();
                 hilo2.join();
-            }catch(Exception e){
-            e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
 
             System.out.println("ganador: " + ganador[0]);
-            
+
             javax.swing.SwingUtilities.invokeLater(() -> {
-           lblGanador.setText(" Ganador: " + ganador[0]);
-            javax.swing.JOptionPane.showMessageDialog(null, "ganador: "+ ganador[0]);
-            //se crea y se guarda una nueva partida con los resultados
-              PartidaModel nueva= new PartidaModel();
+                lblGanador.setText(" Ganador: " + ganador[0]);
+                javax.swing.JOptionPane.showMessageDialog(null, "ganador: " + ganador[0]);
+                //se crea y se guarda una nueva partida con los resultados
+                PartidaModel nueva = new PartidaModel();
 
-            nueva.setIdPartida(3);
-            nueva.setJugador1(personajes[0]);
-            nueva.setJugador2(personajes[1]);
-            nueva.setPunteoJugador1(puntosJ1[0]);
-            nueva.setPunteoJugador2(puntosJ2[0]);
+                nueva.setIdPartida(3);
+                nueva.setJugador1(personajes[jugador1Index]);
+                nueva.setJugador2(personajes[jugador2Index]);
+                nueva.setPunteoJugador1(puntosJ1[0]);
+                nueva.setPunteoJugador2(puntosJ2[0]);
 
-            //guarda la partida en la siguiente posicion
-            PartidaController.partidas[PartidaController.totalPartidas]= nueva;
-            //incrementa el contador de partidas
-            PartidaController.totalPartidas++;
-          btnIniciar.setEnabled(true);
-          //  System.out.println("partida guardada correctamente !! ");
-        });
+                //guarda la partida en la siguiente posicion
+                PartidaController.partidas[PartidaController.totalPartidas] = nueva;
+                //incrementa el contador de partidas
+                PartidaController.totalPartidas++;
+                btnIniciar.setEnabled(true);
+                //  System.out.println("partida guardada correctamente !! ");
+            });
 
         }).start();
         // TODO add your handling code here:
     }//GEN-LAST:event_btnIniciarActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-this.setVisible(false);
+        this.setVisible(false);
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRegresarActionPerformed
 

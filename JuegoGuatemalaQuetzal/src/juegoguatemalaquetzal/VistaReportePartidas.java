@@ -8,10 +8,10 @@ package juegoguatemalaquetzal;
  *
  * @author Manuel
  */
-public class VistaHistorial extends javax.swing.JFrame {
+public class VistaReportePartidas extends javax.swing.JFrame {
     
    
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaHistorial.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaReportePartidas.class.getName());
 //variables del Jframe
    // NUEVAS variables para la tabla
     private javax.swing.JTable tablaHistorial;
@@ -20,21 +20,23 @@ public class VistaHistorial extends javax.swing.JFrame {
     /**
      * Creates new form VistaHistorial
      */
-    public VistaHistorial() {
+    public VistaReportePartidas() {
         initComponents();
         
         //crear una tabla de los datos de las pertidas 
         String[][] datos = new PartidaController().datosGraficaPersonaje();
 
-String[] columnas = {"Jugador", "Puntos"};
+        String[] columnas = {"Jugador", "Puntos"};
+        
+        //
+        tblHistorial.setModel(new javax.swing.table.DefaultTableModel(datos, columnas));
+//tablaHistorial = new javax.swing.JTable(datos, columnas);
+//scrollPane = new javax.swing.JScrollPane(tablaHistorial);
 
-tablaHistorial = new javax.swing.JTable(datos, columnas);
-scrollPane = new javax.swing.JScrollPane(tablaHistorial);
+//scrollPane.setPreferredSize(new java.awt.Dimension(400, 200));
 
-scrollPane.setPreferredSize(new java.awt.Dimension(400, 200));
-
-Jpanel.setLayout(new java.awt.BorderLayout());
-Jpanel.add(scrollPane, java.awt.BorderLayout.CENTER);
+//Jpanel.setLayout(new java.awt.BorderLayout());
+//Jpanel.add(scrollPane, java.awt.BorderLayout.CENTER);
         
         
   
@@ -51,21 +53,42 @@ Jpanel.add(scrollPane, java.awt.BorderLayout.CENTER);
 
         jLabel1 = new javax.swing.JLabel();
         Jpanel = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblHistorial = new javax.swing.JTable();
         btnRegresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("HISTORIAL DE PARTIDAS ");
 
+        tblHistorial.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(tblHistorial);
+
         javax.swing.GroupLayout JpanelLayout = new javax.swing.GroupLayout(Jpanel);
         Jpanel.setLayout(JpanelLayout);
         JpanelLayout.setHorizontalGroup(
             JpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 292, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JpanelLayout.createSequentialGroup()
+                .addContainerGap(54, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
         );
         JpanelLayout.setVerticalGroup(
             JpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 179, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JpanelLayout.createSequentialGroup()
+                .addContainerGap(47, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37))
         );
 
         btnRegresar.setText("REGRESAR");
@@ -78,27 +101,30 @@ Jpanel.add(scrollPane, java.awt.BorderLayout.CENTER);
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnRegresar))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(41, 41, 41)
-                                .addComponent(Jpanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGap(79, 79, 79)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 61, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnRegresar)))
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(36, 36, 36)
+                                .addComponent(Jpanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 359, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(Jpanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(568, 568, 568))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(Jpanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(138, 138, 138)))
                 .addComponent(btnRegresar)
                 .addGap(14, 14, 14))
         );
@@ -133,12 +159,14 @@ this.setVisible(false);
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new VistaHistorial().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new VistaReportePartidas().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Jpanel;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable tblHistorial;
     // End of variables declaration//GEN-END:variables
 }

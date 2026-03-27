@@ -121,7 +121,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVerTopActionPerformed
 
     private void btnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteActionPerformed
-  VistaHistorial vh = new VistaHistorial();
+  VistaReportePartidas vh = new VistaReportePartidas();
     vh.setVisible(true);
 
 
