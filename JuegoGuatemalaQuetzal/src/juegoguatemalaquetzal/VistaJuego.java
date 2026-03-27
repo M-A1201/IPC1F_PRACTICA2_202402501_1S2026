@@ -130,7 +130,22 @@ int totalPersonajes=0;
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
-      //invocar el metodo para seleccionar personajes aleatorios 
+
+        //validar que hay al menos dos jugadores para la partida 
+        int contador = 0;
+
+for (int i = 0; i < personajes.length; i++) {
+    if (personajes[i] != null) {
+        contador++;
+    }
+}
+
+if (contador < 2) {
+    javax.swing.JOptionPane.showMessageDialog(null, "Debe crear al menos 2 personajes");
+    return;
+}
+        
+//invocar el metodo para seleccionar personajes aleatorios 
       seleccionarPersonajes();
       //mostrar el nombre del juador 
       lblMago1.setText(personajes[jugador1Index].getNombre());

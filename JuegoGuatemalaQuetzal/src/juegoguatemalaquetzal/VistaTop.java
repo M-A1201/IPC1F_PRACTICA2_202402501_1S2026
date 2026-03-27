@@ -36,11 +36,13 @@ public void mostrarGrafica() {
     for (int i = 0; i < datos.length; i++) {
         String nombre = datos[i][0];
         int puntos = Integer.parseInt(datos[i][1]);
-        dataset.setValue(puntos, "punto total", nombre);
+        dataset.addValue(puntos, "puntos", nombre);
     }
 
     JFreeChart grafica = ChartFactory.createBarChart(
-        "Ranking de jugadores",
+        
+            
+            "top de personajes por puntos",
         "jugadores",
         "punteo total",
         dataset,
@@ -48,11 +50,17 @@ public void mostrarGrafica() {
         true,
         true,
         false
+            
+              
     );
-
+    
+    //cambiar de color  a las graficas para darle mas estilo
+ grafica.setBackgroundPaint(java.awt.Color.white);
+         grafica.getCategoryPlot().setBackgroundPaint(new java.awt.Color(230,230,250));
+         grafica.getCategoryPlot().getRenderer().setSeriesPaint(0, new java.awt.Color(0,102,204));
     ChartPanel panel = new ChartPanel(grafica);
     panel.setMouseWheelEnabled(true);
-    panel.setPreferredSize(new Dimension(399, 239));
+    panel.setPreferredSize(new Dimension(500, 300));
 
     PnlGrafica.removeAll();
     PnlGrafica.setLayout(new BorderLayout());
@@ -78,11 +86,11 @@ public void mostrarGrafica() {
         PnlGrafica.setLayout(PnlGraficaLayout);
         PnlGraficaLayout.setHorizontalGroup(
             PnlGraficaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 299, Short.MAX_VALUE)
+            .addGap(0, 500, Short.MAX_VALUE)
         );
         PnlGraficaLayout.setVerticalGroup(
             PnlGraficaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 200, Short.MAX_VALUE)
+            .addGap(0, 299, Short.MAX_VALUE)
         );
 
         btnSalir.setText("salir");
@@ -92,21 +100,22 @@ public void mostrarGrafica() {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(PnlGrafica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42))
             .addGroup(layout.createSequentialGroup()
-                .addGap(272, 272, 272)
-                .addComponent(btnSalir)
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(272, 272, 272)
+                        .addComponent(btnSalir))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(PnlGrafica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(150, Short.MAX_VALUE)
+                .addContainerGap(101, Short.MAX_VALUE)
                 .addComponent(PnlGrafica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 66, 66)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnSalir)
                 .addGap(31, 31, 31))
         );
