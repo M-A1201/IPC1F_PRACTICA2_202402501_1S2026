@@ -24,6 +24,7 @@ public class VistaJuego extends javax.swing.JFrame {
     int jugador2Index;
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaJuego.class.getName());
+    //metodo que selecciona dos personajes aliatorios para la partida
     private void seleccionarPersonajes(){
 int totalPersonajes=0;       
       //contamos los personajes existentes
@@ -33,9 +34,9 @@ int totalPersonajes=0;
             }
 
         }
-        //elegir jugador
-        jugador1Index = 0;
-        //oponente aleatorio
+        //elegir jugador de forma aleatorio
+        jugador1Index = (int)(Math.random()*totalPersonajes);
+        //oponente aleatorio 
         jugador2Index = (int) (Math.random() * totalPersonajes);
 
         //para que los jugadores no sean los mismos 
@@ -56,7 +57,11 @@ int totalPersonajes=0;
      */
     public VistaJuego() {
         initComponents();
-        }
+       //mostrar nombre de los personajes en pantalla 
+    lblMago1.setText("A-"+ personajes[jugador1Index].getNombre());
+    lblMago2.setText("B-"+ personajes[jugador2Index].getNombre());
+    
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -119,7 +124,7 @@ int totalPersonajes=0;
                 .addComponent(lblMago1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblMago2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 310, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 393, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnIniciar)
                     .addComponent(btnRegresar))
@@ -131,25 +136,15 @@ int totalPersonajes=0;
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
 
-        //validar que hay al menos dos jugadores para la partida 
-        int contador = 0;
-
-for (int i = 0; i < personajes.length; i++) {
-    if (personajes[i] != null) {
-        contador++;
-    }
-}
-
-if (contador < 2) {
-    javax.swing.JOptionPane.showMessageDialog(null, "Debe crear al menos 2 personajes");
-    return;
-}
+        //reiniciar posicion de los personajes en la pantalla
+        lblMago1.setLocation(0, lblMago1.getY());
+        lblMago2.setLocation(0, lblMago2.getY());
+     //seleccionar personajes aleatorios 
+     seleccionarPersonajes();
         
-//invocar el metodo para seleccionar personajes aleatorios 
-      seleccionarPersonajes();
-      //mostrar el nombre del juador 
-      lblMago1.setText(personajes[jugador1Index].getNombre());
-      lblMago2.setText(personajes[jugador2Index].getNombre());
+      //mostrar el nombre del jugador y del oponente 
+      lblMago1.setText("A-"+personajes[jugador1Index].getNombre());
+      lblMago2.setText("B-"+personajes[jugador2Index].getNombre());
               
 //puntos acumulados del jugador 1 y 2
         btnIniciar.setEnabled(false);
@@ -159,10 +154,11 @@ if (contador < 2) {
         //indicar si ya hay un ganador en la carrera
         final boolean[] ganadorDetectado = {false};
         //se almacena el nombre del jugador ganador
-        final String[] ganador = {""};
+        final String[] ganador = {" "};
+        
+        
         //se crea un hilo para el primer personaje
         Thread hilo = new Thread(() -> {
-
             //movimiento del personaje para moverse hacia la meta
             for (int x = lblMago1.getX(); x <= this.getWidth() - 100; x += 10) {
                 if (ganadorDetectado[0]) {
@@ -179,11 +175,10 @@ if (contador < 2) {
                 //gana automaticamente si gana la snitch
                 if (random == 1) {
                     System.out.println("SNITCH encontrada!! ");
-
                     ganadorDetectado[0] = true;
-                    ganador[0] = "jugador 1";
+                    ganador[0] = personajes[jugador1Index].getNombre();
                     javax.swing.SwingUtilities.invokeLater(() -> {
-                        lblMago1.setLocation(this.getWidth() - 100, lblMago1.getY());
+                    lblMago1.setLocation(this.getWidth() - 100, lblMago1.getY());
                     });
                     break;
 
@@ -205,7 +200,7 @@ if (contador < 2) {
 
                 //verificar si el jugador llego a la meta y gana
                 if (nuevax >= this.getWidth() - 100 && !ganadorDetectado[0]) {
-                    ganador[0] = "Jugador 1";
+                    ganador[0] = personajes[jugador1Index].getNombre();
                     ganadorDetectado[0] = true;
                 }
 
@@ -240,7 +235,7 @@ if (contador < 2) {
                     System.out.println("SNITCH encotrada!! ");
 
                     ganadorDetectado[0] = true;
-                    ganador[0] = "jugador 2";
+                    ganador[0] = personajes[jugador2Index].getNombre();
                     javax.swing.SwingUtilities.invokeLater(() -> {
                         lblMago2.setLocation(this.getWidth() - 100, lblMago2.getY());
                     });
@@ -262,7 +257,7 @@ if (contador < 2) {
                 }
 
                 if (nuevax >= this.getWidth() - 100 && !ganadorDetectado[0]) {
-                    ganador[0] = "Jugador 2";
+                    ganador[0] =personajes[jugador2Index].getNombre();
                     ganadorDetectado[0] = true;
                 }
 

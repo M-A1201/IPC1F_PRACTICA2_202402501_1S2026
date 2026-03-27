@@ -39,10 +39,8 @@ public void mostrarGrafica() {
         dataset.addValue(puntos, "puntos", nombre);
     }
 
-    JFreeChart grafica = ChartFactory.createBarChart(
-        
-            
-            "top de personajes por puntos",
+    JFreeChart grafica = ChartFactory.createBarChart( 
+       "top de personajes por puntos",
         "jugadores",
         "punteo total",
         dataset,
@@ -50,14 +48,14 @@ public void mostrarGrafica() {
         true,
         true,
         false
-            
-              
+    
     );
     
-    //cambiar de color  a las graficas para darle mas estilo
+    //cambiar de color  a la grafica para darle mas estilo
  grafica.setBackgroundPaint(java.awt.Color.white);
          grafica.getCategoryPlot().setBackgroundPaint(new java.awt.Color(230,230,250));
          grafica.getCategoryPlot().getRenderer().setSeriesPaint(0, new java.awt.Color(0,102,204));
+   //enviamos que en el panel se crea la grafica
     ChartPanel panel = new ChartPanel(grafica);
     panel.setMouseWheelEnabled(true);
     panel.setPreferredSize(new Dimension(500, 300));
