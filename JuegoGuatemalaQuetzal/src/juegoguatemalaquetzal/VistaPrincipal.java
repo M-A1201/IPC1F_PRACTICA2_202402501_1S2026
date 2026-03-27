@@ -108,7 +108,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
 //==================================================================
         VistaJuego vjuego = new VistaJuego();
     vjuego.setVisible(true);
-    //................this.dispose(); // cierra el menú actual
+    
 
 
         // TODO add your handling code here:

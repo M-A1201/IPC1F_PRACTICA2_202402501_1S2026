@@ -19,6 +19,19 @@ import org.jfree.data.category.DefaultCategoryDataset;
  */
 public class VistaJuego extends javax.swing.JFrame {
 
+    private void cargarJugadores() {
+    jComboBox1.removeAllItems();
+//recorre el arreglo de personajes para...
+    for (int i = 0; i < PersonajeController.personajes.length; i++) {
+       
+       //verifica que la posicion no este vacia 
+        if (PersonajeController.personajes[i] != null) {
+          //agrega el nombre al combo
+            jComboBox1.addItem(PersonajeController.personajes[i].getNombre());
+        }
+    }
+}
+    
     //variables globales
     int jugador1Index;
     int jugador2Index;
@@ -57,6 +70,9 @@ int totalPersonajes=0;
      */
     public VistaJuego() {
         initComponents();
+//cargamos los jugadores para elejir jugador
+    cargarJugadores(); 
+
        //mostrar nombre de los personajes en pantalla 
     lblMago1.setText("A-"+ personajes[jugador1Index].getNombre());
     lblMago2.setText("B-"+ personajes[jugador2Index].getNombre());
@@ -77,6 +93,8 @@ int totalPersonajes=0;
         lblMago2 = new javax.swing.JLabel();
         lblGanador = new javax.swing.JLabel();
         btnRegresar = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -92,39 +110,58 @@ int totalPersonajes=0;
         btnRegresar.setText("regresar");
         btnRegresar.addActionListener(this::btnRegresarActionPerformed);
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addActionListener(this::jComboBox1ActionPerformed);
+
+        jLabel1.setText("elige su jugador:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(126, Short.MAX_VALUE)
-                        .addComponent(btnRegresar)
-                        .addGap(12, 12, 12))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblMago2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblMago1, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(126, Short.MAX_VALUE)
+                .addComponent(btnRegresar)
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblGanador, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnIniciar)
                         .addGap(56, 56, 56)))
                 .addGap(29, 29, 29))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(lblMago2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblMago1, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(lblGanador)
-                .addGap(11, 11, 11)
-                .addComponent(lblMago1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblMago2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 393, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(11, 11, 11)
+                                .addComponent(lblMago1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblMago2)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel1)))
+                        .addGap(74, 74, 74))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(181, 181, 181)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnIniciar)
                     .addComponent(btnRegresar))
@@ -285,7 +322,12 @@ int totalPersonajes=0;
 
             javax.swing.SwingUtilities.invokeLater(() -> {
                 lblGanador.setText(" Ganador: " + ganador[0]);
-                javax.swing.JOptionPane.showMessageDialog(null, "ganador: " + ganador[0]);
+                //javax.swing.JOptionPane.showMessageDialog(null, "ganador: " + ganador[0]+"\n\n"+
+               String mensaje="ganador: "+ganador[0]+"\n\n"+ 
+                       "puntos "+personajes[jugador1Index].getNombre()+" :"  + puntosJ1[0]+"\n"+
+                       "puntos "+personajes[jugador2Index].getNombre()+" : " + puntosJ2[0];
+                        javax.swing.JOptionPane.showMessageDialog(null, mensaje);
+                
                 //se crea y se guarda una nueva partida con los resultados
                 PartidaModel nueva = new PartidaModel();
 
@@ -311,6 +353,12 @@ int totalPersonajes=0;
         this.setVisible(false);
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRegresarActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -340,6 +388,8 @@ int totalPersonajes=0;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIniciar;
     private javax.swing.JButton btnRegresar;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblGanador;
     private javax.swing.JLabel lblMago1;
     private javax.swing.JLabel lblMago2;

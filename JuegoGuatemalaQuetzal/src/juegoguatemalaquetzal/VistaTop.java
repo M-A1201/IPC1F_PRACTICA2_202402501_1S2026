@@ -36,7 +36,7 @@ public void mostrarGrafica() {
     for (int i = 0; i < datos.length; i++) {
         String nombre = datos[i][0];
         int puntos = Integer.parseInt(datos[i][1]);
-        dataset.addValue(puntos, "puntos", nombre);
+        dataset.setValue(puntos, "puntos", nombre);
     }
 
     JFreeChart grafica = ChartFactory.createBarChart( 

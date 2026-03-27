@@ -14,34 +14,6 @@ public class PartidaController {
    
    //contador de partidas almacenadas
    public static int totalPartidas=0;
-   public void agregarPartidasQuemadas(){
-   PartidaModel partida1= new PartidaModel();
-   PartidaModel partida2=new PartidaModel();
-   partidas[0]=partida1;
-   partidas[1]=partida2;
-   
-   partida1.setIdPartida(1);
-   partida1.setJugador1(personajes[0]);
-   partida1.setJugador2(personajes[1]);
-   
-   partida1.setPunteoJugador1(100);
-   partida1.setPunteoJugador2(200);
-   
-   partida2.setIdPartida(2);
-   partida2.setJugador1(personajes[0]);
-   partida2.setJugador2(personajes[2]);
-   
-   partida2.setPunteoJugador1(200);
-   partida2.setPunteoJugador2(100);
-   
-   
-   
-   
-   partidas[0]=partida1;
-   partidas[1]=partida2;
-  totalPartidas=2; 
-   
-   }
    
    public String[][] datosGraficaPersonaje(){
      String[] nombres =new String[100];  

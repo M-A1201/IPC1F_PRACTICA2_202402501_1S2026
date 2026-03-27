@@ -17,10 +17,7 @@ PartidaController pController=new PartidaController();
 
 //se agregan personajes 
         control.agregarPersonajesQuemados();
-        pController.agregarPartidasQuemadas();
-
-
-       
+        
         //se crea la vista principal del juego 
     VistaPrincipal vPrincipal=new VistaPrincipal();
     //hacemos visible la ventana de la interfaz grafica 
